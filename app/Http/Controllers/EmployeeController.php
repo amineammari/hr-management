@@ -39,4 +39,32 @@ class EmployeeController extends Controller {
         $employee->delete();
         return redirect()->route('employees.index')->with('success', 'Employé supprimé');
     }
+
+    public function dashboard() {
+        $employee = auth()->user()->employee;
+        $leaveHistory = $employee->leaveRequests;
+        $salary = $employee->salary;
+        $performanceEvaluations = $employee->performanceEvaluations;
+        $trainingProgress = $employee->trainings;
+
+        return view('employees.dashboard', compact('employee', 'leaveHistory', 'salary', 'performanceEvaluations', 'trainingProgress'));
+    }
+
+    public function createLeaveRequest() {
+        return view('employees.create-leave-request');
+    }
+
+    public function storeLeaveRequest(Request $request) {
+        $request->validate([
+            'leave_type' => 'required',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+            'reason' => 'required',
+        ]);
+
+        $employee = auth()->user()->employee;
+        $employee->leaveRequests()->create($request->all());
+
+        return redirect()->route('employee.dashboard')->with('success', 'Leave request submitted');
+    }
 }
