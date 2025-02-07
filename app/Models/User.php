@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role', // P86bc
     ];
 
     /**
@@ -44,5 +45,25 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Check if the user is an HR.
+     *
+     * @return bool
+     */
+    public function isHr(): bool
+    {
+        return $this->role === 'HR';
+    }
+
+    /**
+     * Check if the user is an employee.
+     *
+     * @return bool
+     */
+    public function isEmployee(): bool
+    {
+        return $this->role === 'Employee';
     }
 }

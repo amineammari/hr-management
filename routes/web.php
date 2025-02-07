@@ -28,12 +28,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('trainings', TrainingController::class);
     Route::resource('notifications', NotificationController::class);
     Route::put('/leaves/{leave}', [LeaveRequestController::class, 'update'])->name('leaves.update');
+    Route::get('/employee/dashboard', [EmployeeController::class, 'dashboard'])->name('employee.dashboard');
+    Route::get('/employee/leave-request/create', [EmployeeController::class, 'createLeaveRequest'])->name('employee.createLeaveRequest');
+    Route::post('/employee/leave-request', [EmployeeController::class, 'storeLeaveRequest'])->name('employee.storeLeaveRequest');
 });
-
-
-
-
-
-
 
 require __DIR__.'/auth.php';
