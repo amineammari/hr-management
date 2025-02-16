@@ -33,4 +33,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/employee/leave-request', [EmployeeController::class, 'storeLeaveRequest'])->name('employee.storeLeaveRequest');
 });
 
+// Route::middleware(['auth','role:employee'])->group(function() {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::get('/employee/dashboard', [EmployeeController::class, 'dashboard'])->name('employee.dashboard');
+//     Route::get('/employee/leave-request/create', [EmployeeController::class, 'createLeaveRequest'])->name('employee.createLeaveRequest');
+//     Route::post('/employee/leave-request', [EmployeeController::class, 'storeLeaveRequest'])->name('employee.storeLeaveRequest');
+// });
+
 require __DIR__.'/auth.php';
